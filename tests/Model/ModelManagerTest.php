@@ -124,10 +124,10 @@ final class ModelManagerTest extends TestCase
 
         $this->registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('x')
+            ->with(\stdClass::class)
             ->willReturn($em)
         ;
-        $this->assertSame($em, $this->modelManager->getEntityManager('x'));
+        $this->assertSame($em, $this->modelManager->getEntityManager(\stdClass::class));
     }
 
     /**
@@ -593,6 +593,8 @@ final class ModelManagerTest extends TestCase
     }
 
     /**
+     * @param array<int|string> $ids
+     *
      * @dataProvider addIdentifiersToQueryProvider
      */
     public function testAddIdentifiersToQuery(array $expectedParameters, array $identifierFieldNames, array $ids): void
@@ -675,6 +677,7 @@ final class ModelManagerTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Array passed as argument 3 to "Sonata\DoctrineORMAdminBundle\Model\ModelManager::addIdentifiersToQuery()" must not be empty.');
 
+        /** @phpstan-ignore-next-line */
         $this->modelManager->addIdentifiersToQuery(\stdClass::class, $datagrid, []);
     }
 
