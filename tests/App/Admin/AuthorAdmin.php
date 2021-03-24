@@ -19,6 +19,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+/**
+ * @phpstan-extends AbstractAdmin<\Sonata\DoctrineORMAdminBundle\Tests\App\Entity\Author>
+ */
 final class AuthorAdmin extends AbstractAdmin
 {
     protected function configureListFields(ListMapper $list): void
